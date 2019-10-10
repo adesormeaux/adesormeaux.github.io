@@ -284,6 +284,23 @@
 
     function loadData(){
       const json = sessionStorage.getItem('countries_arr');
+      const list = JSON.parse(json);
+
+      const nameArray = list.map((i) => i.name);
+
+      const displayArray = [];
+      const instructions = document.querySelector('.instructions');
+      instructions.innerHTML = '';
+
+      for(let i = 0; i < 50; i++){
+        const selectNumber = getRandomIntInclusive(0,242);
+        let el = document.createElement("li");
+        el.innerHTML = nameArray[selectNumber];
+
+        instructions.appendChild(el);
+      };
+
+      console.log('display array length', displayArray.length);
 
     }
 
@@ -293,20 +310,6 @@
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    function createRandomList(fullList){
-      var listLength = fullList.length;
-      for(var i = 0, i < (listLength - 50), i++){
-
-      }
-    }
-
-
-
-    function getRndCountry(maxLength){
-      return Math.floor(Math.random() * maxLength);
-    }
-
-    //console.log("List of countries in the world", myJSON);
   </script>
 </body>
 
