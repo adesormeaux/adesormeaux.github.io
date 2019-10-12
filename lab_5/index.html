@@ -288,6 +288,7 @@
 
       const nameArray = list.map((i) => i.name);
 
+      //Variables to help track uniqueness
       var numArray = [];
       let unique = true;
 
@@ -296,7 +297,7 @@
 
       for(let i = 0; i < 50; i++){
         var selectNumber = getRandomIntInclusive(0,242);
-
+        //Checks for uniqueness
         do{
           for(let a = 0; a < numArray.length; a++){
             if(numArray[a] == selectNumber){
@@ -315,6 +316,7 @@
 
         instructions.appendChild(el);
 
+        //Adds the number to the "used array" pile
         numArray.push(selectNumber);
       };
 }
