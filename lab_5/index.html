@@ -288,18 +288,34 @@
 
       const nameArray = list.map((i) => i.name);
 
+      var numArray = [];
+      let unique = true;
+
       const instructions = document.querySelector('.instructions');
       instructions.innerHTML = '';
 
       for(let i = 0; i < 50; i++){
-        let selectNumber = getRandomIntInclusive(0,242);
+        var selectNumber = getRandomIntInclusive(0,242);
 
+        do{
+          for(let a = 0; a < numArray.length; a++){
+            if(numArray[a] == selectNumber){
+              selectNumber = getRandomIntInclusive(0,242);
+              unique = false;
+              break
+            } else{
+              unique = true;
+            }
+          }
+        } while(unique == false);
 
         let el = document.createElement("li");
 
         el.innerHTML = nameArray[selectNumber];
 
         instructions.appendChild(el);
+
+        numArray.push(selectNumber);
       };
 }
 
