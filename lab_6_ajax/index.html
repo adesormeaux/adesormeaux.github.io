@@ -20,26 +20,25 @@
   function loadData() {
     fetch('ajax_sample.json')
       .then(res => res.json())
-      .then(data => data.map(c => c.code))
+      .then(data => data.map(item => [item.name,item.code].join(" ")))
       .then(data => {
-        let nameArray = list.map((i) => i.name);
-
-        //Variables to help track uniqueness
+        //Variables to check uniqueness
         let numArray = [];
         let unique = true;
 
-        //const instructions = document.querySelector('.instructions');
-        //instructions.innerHTML = '';
+        let content = document.querySelector(".content");
+
+        let ol = document.createElement("ol");
 
         for(let i = 0; i < 15; i++){
-          var selectNumber = getRandomIntInclusive(0,242);
+          const num = getRandomIntInclusive(0,242);
           //Checks for uniqueness
           do{
             for(let a = 0; a < numArray.length; a++){
-              if(numArray[a] == selectNumber) {
-                selectNumber = getRandomIntInclusive(0,242);
+              if(numArray[a] == num){
+                num = getRandomIntInclusive(0, 242);
                 unique = false;
-                break
+                breaks
               } else{
                 unique = true;
               }
@@ -47,18 +46,22 @@
           } while(unique == false);
 
           let el = document.createElement("li");
+          el.innerText = data[num];
 
-          el.innerHTML = nameArray[selectNumber];
+          ol.appendChild(el);
+        }
 
-          instructions.appendChild(el);
+        content.appendChild(ol);
+        numArray.push(num);
 
-          //Adds the number to the "used array" pile
-          numArray.push(selectNumber);
-
-          document.querySelector(".content").innerText = data;
-        };
+        return data;
       })
   }
+/*
+  function nameAndCode(item){
+    let fullname = [item.name,item.code].join(" ");
+    return fullname;
+  }*/
 
     function getRandomIntInclusive(min, max){
       min = Math.ceil(min);
