@@ -17,13 +17,40 @@
   </div>
   <script>
     function loadData() {
-      fetch('ajax_sample.json')
+      //Use your new endpoint in the fetch request to GET data into your application
+      fetch('https://api.umd.io/v0/bus/routes')
+        //Add a Then statement that logs out your response data and returns it to the next step
         .then(res => res.json())
-        .then(res => {
-          // you can now work in this area
+        //Add a Then statement which makes an array of route data for use and returns
+        .then(data => data.map(item => [item.route_id,item.title].join(" ")))
+        //Add a Then statement that lists bus routes by name and id in an unordered list in the HTML of your page
+        .then(data => {
+          let content = document.querySelector(".content");
 
-          return res;
+          content.innerHTML = "";
+
+          let ul = document.createElement("ul");
+
+          for(let i = 0; i < data.length; i++){
+            let el = document.createElement("li");
+
+            //Edits the title property so that it does not contain the same data as bus route id
+            let route = data[i];
+            if(route.charAt(4) == "1"){
+              let newRoute = route.substring(4, route.length);
+              data[i] = newRoute;
+            }
+
+            el.innerText = data[i];
+
+            ul.appendChild(el);
+          }
+
+          content.appendChild(ul);
+
+          return data;
         })
+        //Add a Then statement that lets you put the name of a bus route you select from the list on the page
         .then(data => document.querySelector(".content").innerText = data);
     }
   </script>
