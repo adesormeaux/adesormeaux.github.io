@@ -51,7 +51,7 @@
           return data;
         })
         //Add a Then statement that lets you put the name of a bus route you select from the list on the page
-        .then(data => document.querySelector(".content").innerText = data);
+        .then(data => document.querySelector(".header").innerText = "UMD Bus Route " + data[6]);
     }
   </script>
 </body>
