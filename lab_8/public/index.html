@@ -31,19 +31,19 @@
 
           let ol = document.createElement("ol");
 
-          for(let i = 0; i < res.length; i++){
+          for(let i = 0; i < res.data.length; i++){
             let el = document.createElement("li");
 
-            el.innerText = res[i];
+            el.innerText = res.data[i];
 
             ol.appendChild(el);
           }
 
           content.appendChild(ol);
 
-          return res;
+          return res.data;
         })
-        .then(codes => document.querySelector(".content").innerText = codes);
+        //.then(data => document.querySelector(".content").innerText = data);
     }
   </script>
 </body>
